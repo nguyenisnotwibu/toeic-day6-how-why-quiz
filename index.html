@@ -3,24 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOEIC Day 6 - Quiz: Part 2 HOW &amp; WHY</title>
+<title>TOEIC Day 6 - Quiz nghe: Part 2 HOW &amp; WHY</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Inter',sans-serif; background:#0f172a; color:#e2e8f0; min-height:100vh; }
   .screen { display:none; max-width:720px; margin:0 auto; padding:20px 16px; }
   .screen.active { display:block; }
-  .start-card { text-align:center; padding:48px 10px; }
+  .start-card { text-align:center; padding:44px 10px; }
   .brand { font-size:.8em; letter-spacing:2px; color:#64748b; text-transform:uppercase; margin-bottom:10px; }
-  .start-card h1 { font-size:2.1em; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
-  .start-card .subtitle { color:#94a3b8; font-size:1em; margin-bottom:28px; }
-  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:22px; text-align:left; }
+  .start-card h1 { font-size:2em; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .start-card .subtitle { color:#94a3b8; font-size:1em; margin-bottom:24px; }
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; text-align:left; }
   .info-box { background:#1e293b; border-radius:12px; padding:16px; border:1px solid #334155; }
   .info-box .label { font-size:.75em; color:#64748b; text-transform:uppercase; letter-spacing:1px; }
   .info-box .value { font-size:1.05em; font-weight:600; color:#f1f5f9; margin-top:4px; }
-  .scope { background:#1e293b; border:1px solid #334155; border-radius:12px; padding:16px 18px; text-align:left; margin-bottom:26px; font-size:.9em; line-height:1.8; color:#cbd5e1; }
+  .scope { background:#1e293b; border:1px solid #334155; border-radius:12px; padding:16px 18px; text-align:left; margin-bottom:18px; font-size:.9em; line-height:1.8; color:#cbd5e1; }
   .scope b { color:#f1f5f9; }
-  .name-input { width:100%; max-width:350px; padding:14px 20px; border-radius:12px; border:2px solid #334155; background:#1e293b; color:#f1f5f9; font-size:1em; text-align:center; margin-bottom:20px; outline:none; transition:border .2s; }
+  .audio-note { background:rgba(59,130,246,.08); border:1px solid rgba(96,165,250,.35); border-radius:12px; padding:12px 16px; text-align:left; margin-bottom:22px; font-size:.86em; line-height:1.7; color:#bfdbfe; }
+  .name-input { width:100%; max-width:350px; padding:14px 20px; border-radius:12px; border:2px solid #334155; background:#1e293b; color:#f1f5f9; font-size:1em; text-align:center; margin-bottom:18px; outline:none; transition:border .2s; }
   .name-input:focus { border-color:#60a5fa; }
   .btn { padding:14px 40px; border-radius:12px; border:none; font-size:1.05em; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
   .btn-primary { background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:#fff; }
@@ -29,22 +30,32 @@
   .btn-secondary:hover { background:#334155; color:#f1f5f9; }
   .quiz-header { display:flex; justify-content:space-between; align-items:center; padding:16px 0; margin-bottom:16px; border-bottom:1px solid #1e293b; }
   .timer { font-size:1.4em; font-weight:700; font-variant-numeric:tabular-nums; }
-  .timer.warning { color:#f59e0b; }
-  .timer.danger { color:#ef4444; animation:pulse 1s infinite; }
+  .timer.warning { color:#f59e0b; } .timer.danger { color:#ef4444; animation:pulse 1s infinite; }
   @keyframes pulse { 50% { opacity:.5; } }
   .progress-bar { width:100%; height:6px; background:#1e293b; border-radius:3px; margin-bottom:20px; overflow:hidden; }
   .progress-fill { height:100%; background:linear-gradient(90deg,#3b82f6,#8b5cf6); border-radius:3px; transition:width .4s ease; }
   .q-counter { font-size:.85em; color:#64748b; }
   .category-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:.75em; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
-  .cat-noun { background:rgba(52,211,153,.15); color:#34d399; }
-  .cat-adj { background:rgba(251,146,60,.15); color:#fb923c; }
-  .cat-adv { background:rgba(96,165,250,.15); color:#60a5fa; }
-  .cat-mix { background:rgba(168,85,247,.15); color:#a855f7; }
+  .cat-howT { background:rgba(52,211,153,.15); color:#34d399; }
+  .cat-howP { background:rgba(251,146,60,.15); color:#fb923c; }
+  .cat-whyT { background:rgba(96,165,250,.15); color:#60a5fa; }
+  .cat-whyP { background:rgba(168,85,247,.15); color:#a855f7; }
   .question-card { background:#1e293b; border-radius:16px; padding:26px; margin-bottom:16px; border:1px solid #334155; }
   .question-text { font-size:1.12em; font-weight:600; line-height:1.55; margin-bottom:20px; }
+  .listen-box { display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:#0f172a; border:1px solid #334155; border-radius:14px; padding:18px; margin-bottom:20px; }
+  .speaker { font-size:2em; line-height:1; }
+  .speaker.playing { animation:beat .9s ease-in-out infinite; }
+  @keyframes beat { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.15); opacity:.7; } }
+  .listen-info { flex:1; min-width:150px; font-size:.9em; color:#94a3b8; line-height:1.5; }
+  .listen-info b { color:#f1f5f9; display:block; font-size:1.05em; margin-bottom:2px; }
+  .mini { padding:8px 14px; border-radius:20px; border:1px solid #334155; background:#1e293b; color:#cbd5e1; cursor:pointer; font-family:inherit; font-size:.85em; font-weight:600; }
+  .mini:hover { border-color:#60a5fa; color:#f1f5f9; }
+  .mini.on { background:#172554; border-color:#60a5fa; color:#93c5fd; }
   .options { display:flex; flex-direction:column; gap:10px; }
   .option { padding:14px 18px; border-radius:12px; border:2px solid #334155; background:#0f172a; cursor:pointer; transition:all .2s; font-size:.95em; line-height:1.4; }
   .option:hover { border-color:#60a5fa; background:#172554; }
+  .option.masked { font-weight:700; letter-spacing:1px; color:#94a3b8; }
+  .option.masked .dots { color:#475569; font-weight:400; letter-spacing:3px; margin-left:8px; }
   .option.correct { border-color:#22c55e; background:rgba(34,197,94,.12); }
   .option.wrong { border-color:#ef4444; background:rgba(239,68,68,.12); }
   .explanation { margin-top:16px; padding:14px 18px; background:#0f172a; border-radius:12px; border-left:3px solid #8b5cf6; font-size:.9em; line-height:1.6; color:#cbd5e1; display:none; }
@@ -64,7 +75,8 @@
   .break-card .bc-label { font-size:.7em; text-transform:uppercase; letter-spacing:1px; color:#64748b; margin-bottom:6px; }
   .break-card .bc-pct { font-size:1.8em; font-weight:800; }
   .break-card .bc-detail { font-size:.8em; color:#94a3b8; margin-top:4px; }
-  .bc-noun .bc-pct { color:#34d399; } .bc-adj .bc-pct { color:#fb923c; } .bc-adv .bc-pct { color:#60a5fa; } .bc-mix .bc-pct { color:#a855f7; }
+  .bc-howT .bc-pct { color:#34d399; } .bc-howP .bc-pct { color:#fb923c; }
+  .bc-whyT .bc-pct { color:#60a5fa; } .bc-whyP .bc-pct { color:#a855f7; }
   .advice-box { background:#1e293b; border:1px solid #334155; border-left:3px solid #f59e0b; border-radius:12px; padding:14px 18px; margin-bottom:26px; font-size:.9em; line-height:1.7; color:#cbd5e1; }
   .advice-box b { color:#fbbf24; }
   .lb-title { font-size:1.2em; font-weight:700; margin-bottom:14px; }
@@ -79,7 +91,7 @@
   .filter-row button { padding:8px 14px; border-radius:20px; border:1px solid #334155; background:#1e293b; color:#94a3b8; cursor:pointer; font-family:inherit; font-size:.85em; }
   .filter-row button.on { background:#172554; color:#f1f5f9; border-color:#60a5fa; }
   .footer { text-align:center; color:#475569; font-size:.75em; margin-top:30px; }
-  @media (max-width:520px){ .info-grid,.breakdown{ grid-template-columns:1fr 1fr; } .btn{ padding:13px 26px; } .question-card{ padding:20px; } }
+  @media (max-width:520px){ .btn{ padding:13px 26px; } .question-card{ padding:20px; } }
 </style>
 </head>
 <body>
@@ -87,8 +99,8 @@
 <div class="screen active" id="startScreen">
   <div class="start-card">
     <div class="brand">TOEIC · Thầy Vũ Nguyên</div>
-    <h1>TOEIC Day 6 — HOW &amp; WHY</h1>
-    <p class="subtitle">Kiểm tra lý thuyết và luyện phản xạ câu hỏi HOW – WHY trong Part 2</p>
+    <h1>DAY 6 — HOW &amp; WHY</h1>
+    <p class="subtitle">Part 2: nghe câu hỏi và chọn câu trả lời đúng</p>
     <div class="info-grid">
       <div class="info-box"><div class="label">Nội dung</div><div class="value">Part 2 — HOW &amp; WHY</div></div>
       <div class="info-box"><div class="label">Phạm vi</div><div class="value">Day 6</div></div>
@@ -96,10 +108,14 @@
       <div class="info-box"><div class="label">Số câu</div><div class="value">45 câu</div></div>
     </div>
     <div class="scope">
-      📗 <b>Lý thuyết HOW:</b> How many / much / often / long / far / well / old / soon, How + be, How + get, How + can<br>
-      📙 <b>Luyện HOW:</b> chọn câu trả lời đúng cho câu hỏi HOW (FILE 6.1 – 5.2)<br>
-      📘 <b>Lý thuyết WHY:</b> cách trả lời Because / To V, loại đáp án Yes-No, bẫy từ đồng âm<br>
-      🔀 <b>Luyện WHY:</b> chọn câu trả lời đúng cho câu hỏi WHY (FILE 6.3 – 6.4)
+      📗 <b>Lý thuyết HOW (8 câu):</b> How many / much / often / long / far, How + be, How + get, How + can<br>
+      📙 <b>Luyện nghe HOW (17 câu):</b> nghe câu hỏi + 3 lựa chọn, chọn đáp án đúng<br>
+      📘 <b>Lý thuyết WHY (5 câu):</b> trả lời Because / To V, loại đáp án Yes-No, bẫy đồng âm<br>
+      🔀 <b>Luyện nghe WHY (15 câu):</b> nghe câu hỏi + 3 lựa chọn, chọn đáp án đúng
+    </div>
+    <div class="audio-note">
+      🎧 <b>Phần luyện nghe:</b> audio tự động phát ngay khi câu hỏi hiện ra, và <b>lựa chọn A / B / C bị che</b> — chỉ hiện ra sau khi em chọn xong, kèm đáp án đúng và giải thích.<br>
+      Hãy bật loa hoặc đeo tai nghe trước khi bắt đầu. Có nút <b>Nghe lại</b> và chỉnh tốc độ 0.75x / 1x.
     </div>
     <input class="name-input" id="playerName" placeholder="Nhập tên của bạn..." maxlength="30" />
     <br>
@@ -109,7 +125,7 @@
 
 <div class="screen" id="quizScreen">
   <div class="quiz-header">
-    <span class="q-counter" id="qCounter">1 / 45</span>
+    <span class="q-counter" id="qCounter">Câu 1 / 45</span>
     <span class="timer" id="timer">60:00</span>
   </div>
   <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -127,10 +143,10 @@
     <div class="grade-msg" id="gradeMsg"></div>
   </div>
   <div class="breakdown">
-    <div class="break-card bc-noun"><div class="bc-label">Lý thuyết HOW</div><div class="bc-pct" id="howTPct">0%</div><div class="bc-detail" id="howTDetail"></div></div>
-    <div class="break-card bc-adj"><div class="bc-label">Luyện HOW</div><div class="bc-pct" id="howPPct">0%</div><div class="bc-detail" id="howPDetail"></div></div>
-    <div class="break-card bc-adv"><div class="bc-label">Lý thuyết WHY</div><div class="bc-pct" id="whyTPct">0%</div><div class="bc-detail" id="whyTDetail"></div></div>
-    <div class="break-card bc-mix"><div class="bc-label">Luyện WHY</div><div class="bc-pct" id="whyPPct">0%</div><div class="bc-detail" id="whyPDetail"></div></div>
+    <div class="break-card bc-howT"><div class="bc-label">Lý thuyết HOW</div><div class="bc-pct" id="howTPct">0%</div><div class="bc-detail" id="howTDetail"></div></div>
+    <div class="break-card bc-howP"><div class="bc-label">Nghe HOW</div><div class="bc-pct" id="howPPct">0%</div><div class="bc-detail" id="howPDetail"></div></div>
+    <div class="break-card bc-whyT"><div class="bc-label">Lý thuyết WHY</div><div class="bc-pct" id="whyTPct">0%</div><div class="bc-detail" id="whyTDetail"></div></div>
+    <div class="break-card bc-whyP"><div class="bc-label">Nghe WHY</div><div class="bc-pct" id="whyPPct">0%</div><div class="bc-detail" id="whyPDetail"></div></div>
   </div>
   <div class="advice-box" id="adviceBox"></div>
   <div class="lb-title">🏆 Bảng xếp hạng</div>
@@ -147,9 +163,9 @@
     <button class="on" onclick="renderReview('all',this)">Tất cả</button>
     <button onclick="renderReview('wrong',this)">Câu sai</button>
     <button onclick="renderReview('howT',this)">LT HOW</button>
-    <button onclick="renderReview('howP',this)">Luyện HOW</button>
+    <button onclick="renderReview('howP',this)">Nghe HOW</button>
     <button onclick="renderReview('whyT',this)">LT WHY</button>
-    <button onclick="renderReview('whyP',this)">Luyện WHY</button>
+    <button onclick="renderReview('whyP',this)">Nghe WHY</button>
   </div>
   <div id="reviewArea"></div>
   <div class="action-row" style="margin-top:24px">
@@ -171,7 +187,8 @@ const questions = [
    "(D) Khoảng cách"
   ],
   "ans": 0,
-  "exp": "How many + N đếm được → trả lời bằng SỐ LƯỢNG: ten, thirty letters, a hundred…"
+  "exp": "How many + N đếm được → trả lời bằng SỐ LƯỢNG: ten, thirty letters, a hundred…",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -183,7 +200,8 @@ const questions = [
    "(D) Tính từ (very good)"
   ],
   "ans": 0,
-  "exp": "How much (giá) → Number + currency: 2000 dollars, 50 pounds, 100 euros."
+  "exp": "How much (giá) → Number + currency: 2000 dollars, 50 pounds, 100 euros.",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -195,7 +213,8 @@ const questions = [
    "(D) by taxi"
   ],
   "ans": 1,
-  "exp": "How often hỏi TẦN SUẤT → every…, once/twice/3 times…, whenever…"
+  "exp": "How often hỏi TẦN SUẤT → every…, once/twice/3 times…, whenever…",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -207,7 +226,8 @@ const questions = [
    "(D) Lý do"
   ],
   "ans": 0,
-  "exp": "How long → KHOẢNG THỜI GIAN. Lưu ý: cũng có thể hỏi độ dài (two pages long)."
+  "exp": "How long → KHOẢNG THỜI GIAN. Lưu ý: cũng có thể hỏi độ dài (two pages long).",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -219,7 +239,8 @@ const questions = [
    "(D) Số nhân viên"
   ],
   "ans": 1,
-  "exp": "How far → KHOẢNG CÁCH: 5 km, 100 m, two blocks away."
+  "exp": "How far → KHOẢNG CÁCH: 5 km, 100 m, two blocks away.",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -231,7 +252,8 @@ const questions = [
    "(D) Một khoảng thời gian"
   ],
   "ans": 0,
-  "exp": "How + be → hỏi TÍNH CHẤT, trả lời bằng ADJ: good, not good, boring…"
+  "exp": "How + be → hỏi TÍNH CHẤT, trả lời bằng ADJ: good, not good, boring…",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -243,7 +265,8 @@ const questions = [
    "(D) Người đi cùng"
   ],
   "ans": 2,
-  "exp": "How + get/go → PHƯƠNG TIỆN: by motorbike, cab, subway; hoặc “someone gave me a ride/lift”."
+  "exp": "How + get/go → PHƯƠNG TIỆN: by motorbike, cab, subway; hoặc “someone gave me a ride/lift”.",
+  "listen": false
  },
  {
   "cat": "howT",
@@ -255,7 +278,8 @@ const questions = [
    "(D) Giá khóa học"
   ],
   "ans": 0,
-  "exp": "How + can + V → PHƯƠNG PHÁP: By + V-ing, Through + N."
+  "exp": "How + can + V → PHƯƠNG PHÁP: By + V-ing, Through + N.",
+  "listen": false
  },
  {
   "cat": "howP",
@@ -266,7 +290,15 @@ const questions = [
    "(C) I don’t have a watch"
   ],
   "ans": 0,
-  "exp": "How much time → khoảng thời gian cho phép. (b) và (c) chỉ lặp âm work / time."
+  "exp": "How much time → khoảng thời gian cho phép. (b) và (c) chỉ lặp âm work / time.",
+  "listen": true,
+  "file": "cau-09.mp3",
+  "speak": [
+   "How much time will we have to do the work?",
+   "A. We have until next week",
+   "B. We worked all night",
+   "C. I don’t have a watch"
+  ]
  },
  {
   "cat": "howP",
@@ -277,7 +309,15 @@ const questions = [
    "(C) Rain turns to snow in cold weather"
   ],
   "ans": 1,
-  "exp": "How long → khoảng thời gian: all afternoon."
+  "exp": "How long → khoảng thời gian: all afternoon.",
+  "listen": true,
+  "file": "cau-10.mp3",
+  "speak": [
+   "How long has it been raining?",
+   "A. It is raining from California to New York",
+   "B. It’s rained all afternoon",
+   "C. Rain turns to snow in cold weather"
+  ]
  },
  {
   "cat": "howP",
@@ -288,7 +328,15 @@ const questions = [
    "(C) I get about thirty letters a day"
   ],
   "ans": 2,
-  "exp": "How much mail → số lượng thư. Bẫy: (a) có “dollars” đánh lừa người nghe quen how much = giá."
+  "exp": "How much mail → số lượng thư. Bẫy: (a) có “dollars” đánh lừa người nghe quen how much = giá.",
+  "listen": true,
+  "file": "cau-11.mp3",
+  "speak": [
+   "How much mail do you get every day?",
+   "A. The mail carrier earns one hundred dollars a day",
+   "B. The mail was late today",
+   "C. I get about thirty letters a day"
+  ]
  },
  {
   "cat": "howP",
@@ -299,7 +347,15 @@ const questions = [
    "(C) Golfing is a relaxing sport"
   ],
   "ans": 1,
-  "exp": "How well → mức độ giỏi. Trả lời: not very well."
+  "exp": "How well → mức độ giỏi. Trả lời: not very well.",
+  "listen": true,
+  "file": "cau-12.mp3",
+  "speak": [
+   "How well do you play golf?",
+   "A. I feel better when I play golf",
+   "B. Not very well, I’m a beginner",
+   "C. Golfing is a relaxing sport"
+  ]
  },
  {
   "cat": "howP",
@@ -310,7 +366,15 @@ const questions = [
    "(C) No, I’m not a member"
   ],
   "ans": 0,
-  "exp": "How many → số lượng. Câu hỏi Wh- KHÔNG trả lời Yes/No nên loại (c)."
+  "exp": "How many → số lượng. Câu hỏi Wh- KHÔNG trả lời Yes/No nên loại (c).",
+  "listen": true,
+  "file": "cau-13.mp3",
+  "speak": [
+   "How many members are on the board of directors?",
+   "A. There are ten, counting the chairperson",
+   "B. We all need directions sometimes",
+   "C. No, I’m not a member"
+  ]
  },
  {
   "cat": "howP",
@@ -321,7 +385,15 @@ const questions = [
    "(C) I travel about three times a year"
   ],
   "ans": 2,
-  "exp": "How often → tần suất: three times a year. (b) trả lời cho How do you go."
+  "exp": "How often → tần suất: three times a year. (b) trả lời cho How do you go.",
+  "listen": true,
+  "file": "cau-14.mp3",
+  "speak": [
+   "How often do you take a business trip?",
+   "A. Our business didn’t do well this year",
+   "B. I always go by plane",
+   "C. I travel about three times a year"
+  ]
  },
  {
   "cat": "howP",
@@ -332,7 +404,15 @@ const questions = [
    "(C) They weren’t very expensive"
   ],
   "ans": 0,
-  "exp": "How old → tuổi/độ mới. “Bought them last year” = mới một năm."
+  "exp": "How old → tuổi/độ mới. “Bought them last year” = mới một năm.",
+  "listen": true,
+  "file": "cau-15.mp3",
+  "speak": [
+   "How old are these computers?",
+   "A. We bought them last year",
+   "B. They work very well",
+   "C. They weren’t very expensive"
+  ]
  },
  {
   "cat": "howP",
@@ -343,7 +423,15 @@ const questions = [
    "(C) It’s a very busy airport"
   ],
   "ans": 1,
-  "exp": "How can I get to → phương tiện/cách đi. (a) trả lời cho How far."
+  "exp": "How can I get to → phương tiện/cách đi. (a) trả lời cho How far.",
+  "listen": true,
+  "file": "cau-16.mp3",
+  "speak": [
+   "How can I get to the airport?",
+   "A. It’s only 5 miles from here",
+   "B. There’s a bus that will take you there",
+   "C. It’s a very busy airport"
+  ]
  },
  {
   "cat": "howP",
@@ -354,7 +442,15 @@ const questions = [
    "(C) You can send him an e-mail message"
   ],
   "ans": 2,
-  "exp": "How can I contact → cách thức liên lạc. Bẫy đồng âm: contact / contract."
+  "exp": "How can I contact → cách thức liên lạc. Bẫy đồng âm: contact / contract.",
+  "listen": true,
+  "file": "cau-17.mp3",
+  "speak": [
+   "How can I contact Mr. Peterson?",
+   "A. He’ll come back tomorrow",
+   "B. They already signed the contract",
+   "C. You can send him an e-mail message"
+  ]
  },
  {
   "cat": "howP",
@@ -365,7 +461,15 @@ const questions = [
    "(C) I come here every day"
   ],
   "ans": 1,
-  "exp": "How far → khoảng cách: two blocks away."
+  "exp": "How far → khoảng cách: two blocks away.",
+  "listen": true,
+  "file": "cau-18.mp3",
+  "speak": [
+   "How far is your office from here?",
+   "A. This office is too small",
+   "B. It’s only two blocks away",
+   "C. I come here every day"
+  ]
  },
  {
   "cat": "howP",
@@ -376,7 +480,15 @@ const questions = [
    "(C) It took 2 hours"
   ],
   "ans": 0,
-  "exp": "How long ở đây hỏi ĐỘ DÀI lá thư, không phải thời gian → two pages long."
+  "exp": "How long ở đây hỏi ĐỘ DÀI lá thư, không phải thời gian → two pages long.",
+  "listen": true,
+  "file": "cau-19.mp3",
+  "speak": [
+   "How long is this letter?",
+   "A. The letter is two pages long",
+   "B. She’s five feet tall",
+   "C. It took 2 hours"
+  ]
  },
  {
   "cat": "howP",
@@ -387,7 +499,15 @@ const questions = [
    "(C) The bank is two blocks away"
   ],
   "ans": 1,
-  "exp": "How late → mở đến mấy giờ: until 6 p.m. Bẫy đồng âm: banker ate."
+  "exp": "How late → mở đến mấy giờ: until 6 p.m. Bẫy đồng âm: banker ate.",
+  "listen": true,
+  "file": "cau-20.mp3",
+  "speak": [
+   "How late will the bank be open?",
+   "A. The banker ate at his desk",
+   "B. The bank will be open until 6 p.m.",
+   "C. The bank is two blocks away"
+  ]
  },
  {
   "cat": "howP",
@@ -398,7 +518,15 @@ const questions = [
    "(C) We need some new computers"
   ],
   "ans": 1,
-  "exp": "How much + cost → số tiền. Bẫy đồng âm: cost / costumes."
+  "exp": "How much + cost → số tiền. Bẫy đồng âm: cost / costumes.",
+  "listen": true,
+  "file": "cau-21.mp3",
+  "speak": [
+   "How much does a new computer cost?",
+   "A. She has 10 different costumes",
+   "B. A basic model costs about 800 dollars",
+   "C. We need some new computers"
+  ]
  },
  {
   "cat": "howP",
@@ -409,7 +537,15 @@ const questions = [
    "(C) I’ll have it finished by next week"
   ],
   "ans": 2,
-  "exp": "How long will it take → thời gian hoàn thành: by next week. (b) là bẫy “long = pages”."
+  "exp": "How long will it take → thời gian hoàn thành: by next week. (b) là bẫy “long = pages”.",
+  "listen": true,
+  "file": "cau-22.mp3",
+  "speak": [
+   "How long will it take to finish that report?",
+   "A. I’ll report it to the manager",
+   "B. It’s about 20 pages long",
+   "C. I’ll have it finished by next week"
+  ]
  },
  {
   "cat": "howP",
@@ -420,7 +556,15 @@ const questions = [
    "(C) I got it at a store"
   ],
   "ans": 0,
-  "exp": "How did you get to → phương tiện: took a train."
+  "exp": "How did you get to → phương tiện: took a train.",
+  "listen": true,
+  "file": "cau-23.mp3",
+  "speak": [
+   "How did you get to New York?",
+   "A. I took a train",
+   "B. It’s a very interesting city",
+   "C. I got it at a store"
+  ]
  },
  {
   "cat": "howP",
@@ -431,7 +575,15 @@ const questions = [
    "(C) I thought it was boring"
   ],
   "ans": 2,
-  "exp": "How did you like → hỏi CẢM NHẬN, trả lời bằng nhận xét: boring."
+  "exp": "How did you like → hỏi CẢM NHẬN, trả lời bằng nhận xét: boring.",
+  "listen": true,
+  "file": "cau-24.mp3",
+  "speak": [
+   "How did you like the movie?",
+   "A. It lasted about 2 hours",
+   "B. The next one starts at 5 o’clock",
+   "C. I thought it was boring"
+  ]
  },
  {
   "cat": "howP",
@@ -442,7 +594,15 @@ const questions = [
    "(C) The meeting was very interesting"
   ],
   "ans": 1,
-  "exp": "How soon → bao lâu nữa: in about thirty minutes."
+  "exp": "How soon → bao lâu nữa: in about thirty minutes.",
+  "listen": true,
+  "file": "cau-25.mp3",
+  "speak": [
+   "How soon will the meeting be over?",
+   "A. It’s just upstairs",
+   "B. We’ll be finished in about thirty minutes",
+   "C. The meeting was very interesting"
+  ]
  },
  {
   "cat": "whyT",
@@ -454,7 +614,8 @@ const questions = [
    "(D) Một mệnh đề nêu nguyên nhân (It needs new batteries)"
   ],
   "ans": 2,
-  "exp": "Wh-question không bao giờ trả lời Yes/No — loại ngay đáp án bắt đầu bằng Yes/No."
+  "exp": "Wh-question không bao giờ trả lời Yes/No — loại ngay đáp án bắt đầu bằng Yes/No.",
+  "listen": false
  },
  {
   "cat": "whyT",
@@ -465,7 +626,8 @@ const questions = [
    "(C) I’ve been working too hard"
   ],
   "ans": 0,
-  "exp": "Why có thể trả lời bằng TO + V chỉ mục đích, không nhất thiết phải có Because."
+  "exp": "Why có thể trả lời bằng TO + V chỉ mục đích, không nhất thiết phải có Because.",
+  "listen": false
  },
  {
   "cat": "whyT",
@@ -477,7 +639,8 @@ const questions = [
    "(D) Đáp án có tên riêng"
   ],
   "ans": 0,
-  "exp": "Ví dụ: bills → Bill, finished → finish line, printer → printings. Nghe thấy từ giống hệt thì cảnh giác."
+  "exp": "Ví dụ: bills → Bill, finished → finish line, printer → printings. Nghe thấy từ giống hệt thì cảnh giác.",
+  "listen": false
  },
  {
   "cat": "whyT",
@@ -489,7 +652,8 @@ const questions = [
    "(D) Giá của cà vạt"
   ],
   "ans": 1,
-  "exp": "Với câu hỏi phủ định Why aren’t/doesn’t…, hãy tìm đáp án giải thích lý do của việc KHÔNG làm."
+  "exp": "Với câu hỏi phủ định Why aren’t/doesn’t…, hãy tìm đáp án giải thích lý do của việc KHÔNG làm.",
+  "listen": false
  },
  {
   "cat": "whyT",
@@ -500,7 +664,8 @@ const questions = [
    "(C) Why isn’t Ms. Wilson here today?"
   ],
   "ans": 2,
-  "exp": "Đây là lý do vắng mặt → hợp với Why isn’t … here today?"
+  "exp": "Đây là lý do vắng mặt → hợp với Why isn’t … here today?",
+  "listen": false
  },
  {
   "cat": "whyP",
@@ -511,7 +676,15 @@ const questions = [
    "(C) They are crossing the finish line"
   ],
   "ans": 0,
-  "exp": "Lý do chưa copy xong: máy hết giấy. Bẫy lặp từ: finish."
+  "exp": "Lý do chưa copy xong: máy hết giấy. Bẫy lặp từ: finish.",
+  "listen": true,
+  "file": "cau-31.mp3",
+  "speak": [
+   "Why aren’t they finished copying the reports?",
+   "A. The copy machine is out of paper",
+   "B. They want a nice finish on the furniture",
+   "C. They are crossing the finish line"
+  ]
  },
  {
   "cat": "whyP",
@@ -522,7 +695,15 @@ const questions = [
    "(C) Bill is due here any minute"
   ],
   "ans": 1,
-  "exp": "Lý do hóa đơn quá hạn: không còn tiền trong tài khoản. Bẫy: bills → Bill (tên người)."
+  "exp": "Lý do hóa đơn quá hạn: không còn tiền trong tài khoản. Bẫy: bills → Bill (tên người).",
+  "listen": true,
+  "file": "cau-32.mp3",
+  "speak": [
+   "Why are these bills overdue?",
+   "A. We paid them last month",
+   "B. There’s no money in our account",
+   "C. Bill is due here any minute"
+  ]
  },
  {
   "cat": "whyP",
@@ -533,7 +714,15 @@ const questions = [
    "(C) They’re repairing the water pipe"
   ],
   "ans": 2,
-  "exp": "Lý do mất nước: đang sửa đường ống."
+  "exp": "Lý do mất nước: đang sửa đường ống.",
+  "listen": true,
+  "file": "cau-33.mp3",
+  "speak": [
+   "Why is there no water?",
+   "A. It is always dry in the summer",
+   "B. You can build it anywhere",
+   "C. They’re repairing the water pipe"
+  ]
  },
  {
   "cat": "whyP",
@@ -544,7 +733,15 @@ const questions = [
    "(C) She speaks Japanese quite well"
   ],
   "ans": 0,
-  "exp": "Lý do nói được tiếng Nhật: đã học ở trường. (b), (c) lặp từ Japanese/speak."
+  "exp": "Lý do nói được tiếng Nhật: đã học ở trường. (b), (c) lặp từ Japanese/speak.",
+  "listen": true,
+  "file": "cau-34.mp3",
+  "speak": [
+   "Why did she speak Japanese?",
+   "A. She studied the language in school",
+   "B. She loves Japanese food",
+   "C. She speaks Japanese quite well"
+  ]
  },
  {
   "cat": "whyP",
@@ -555,7 +752,15 @@ const questions = [
    "(C) I’m going to type a letter"
   ],
   "ans": 2,
-  "exp": "Mục đích bật máy: để đánh máy một lá thư."
+  "exp": "Mục đích bật máy: để đánh máy một lá thư.",
+  "listen": true,
+  "file": "cau-35.mp3",
+  "speak": [
+   "Why do you turn the computer on?",
+   "A. It’s on my desk",
+   "B. He turned the report in yesterday",
+   "C. I’m going to type a letter"
+  ]
  },
  {
   "cat": "whyP",
@@ -566,7 +771,15 @@ const questions = [
    "(C) He works alone"
   ],
   "ans": 0,
-  "exp": "Lý do điện thoại hỏng: hết pin. Bẫy lặp từ: work."
+  "exp": "Lý do điện thoại hỏng: hết pin. Bẫy lặp từ: work.",
+  "listen": true,
+  "file": "cau-36.mp3",
+  "speak": [
+   "Why doesn’t this phone work?",
+   "A. It needs new batteries",
+   "B. You can call me at work",
+   "C. He works alone"
+  ]
  },
  {
   "cat": "whyP",
@@ -577,7 +790,15 @@ const questions = [
    "(C) John helped me move it"
   ],
   "ans": 1,
-  "exp": "Lý do chuyển đến: có việc làm ở đó. Bẫy gần âm: move → movie."
+  "exp": "Lý do chuyển đến: có việc làm ở đó. Bẫy gần âm: move → movie.",
+  "listen": true,
+  "file": "cau-37.mp3",
+  "speak": [
+   "Why did he move to California?",
+   "A. It was a very good movie",
+   "B. He got a job there",
+   "C. John helped me move it"
+  ]
  },
  {
   "cat": "whyP",
@@ -588,7 +809,15 @@ const questions = [
    "(C) He went downstairs"
   ],
   "ans": 1,
-  "exp": "Lý do mở cửa sổ: để hít thở không khí trong lành."
+  "exp": "Lý do mở cửa sổ: để hít thở không khí trong lành.",
+  "listen": true,
+  "file": "cau-38.mp3",
+  "speak": [
+   "Why do you always open the window?",
+   "A. The window is open",
+   "B. I like to breathe fresh air",
+   "C. He went downstairs"
+  ]
  },
  {
   "cat": "whyP",
@@ -599,7 +828,15 @@ const questions = [
    "(C) Yes, it happened"
   ],
   "ans": 1,
-  "exp": "Lý do vui: vừa có việc mới. Hai đáp án Yes bị loại ngay vì đây là câu hỏi Wh-."
+  "exp": "Lý do vui: vừa có việc mới. Hai đáp án Yes bị loại ngay vì đây là câu hỏi Wh-.",
+  "listen": true,
+  "file": "cau-39.mp3",
+  "speak": [
+   "Why is she happy?",
+   "A. Yes, I did notice that",
+   "B. She got a new job this morning",
+   "C. Yes, it happened"
+  ]
  },
  {
   "cat": "whyP",
@@ -610,7 +847,15 @@ const questions = [
    "(C) They live next door"
   ],
   "ans": 0,
-  "exp": "Lý do ngồi cạnh cửa: có thể phải về sớm. Bẫy lặp từ: door."
+  "exp": "Lý do ngồi cạnh cửa: có thể phải về sớm. Bẫy lặp từ: door.",
+  "listen": true,
+  "file": "cau-40.mp3",
+  "speak": [
+   "Why are you sitting next to the door?",
+   "A. I may have to leave early",
+   "B. The doors are closed",
+   "C. They live next door"
+  ]
  },
  {
   "cat": "whyP",
@@ -621,7 +866,15 @@ const questions = [
    "(C) It was a cold winter"
   ],
   "ans": 1,
-  "exp": "Lý do máy in không chạy: cần hộp mực mới. Bẫy gần âm: printer → printings / winter."
+  "exp": "Lý do máy in không chạy: cần hộp mực mới. Bẫy gần âm: printer → printings / winter.",
+  "listen": true,
+  "file": "cau-41.mp3",
+  "speak": [
+   "Why won’t this printer work?",
+   "A. You have nice printings",
+   "B. It needs a new cartridge",
+   "C. It was a cold winter"
+  ]
  },
  {
   "cat": "whyP",
@@ -632,7 +885,15 @@ const questions = [
    "(C) I’ve been sick"
   ],
   "ans": 2,
-  "exp": "Lý do không kịp hạn: bị ốm. Bẫy liên tưởng: time → watch."
+  "exp": "Lý do không kịp hạn: bị ốm. Bẫy liên tưởng: time → watch.",
+  "listen": true,
+  "file": "cau-42.mp3",
+  "speak": [
+   "Why can’t you finish the project on time?",
+   "A. My watch is broken",
+   "B. It’s time to go",
+   "C. I’ve been sick"
+  ]
  },
  {
   "cat": "whyP",
@@ -643,7 +904,15 @@ const questions = [
    "(C) He’ll have to wait"
   ],
   "ans": 0,
-  "exp": "Lý do đến muộn: xe không nổ máy. Bẫy gần âm: late → ate / wait."
+  "exp": "Lý do đến muộn: xe không nổ máy. Bẫy gần âm: late → ate / wait.",
+  "listen": true,
+  "file": "cau-43.mp3",
+  "speak": [
+   "Why were you late?",
+   "A. My car wouldn’t start",
+   "B. I ate lunch already",
+   "C. He’ll have to wait"
+  ]
  },
  {
   "cat": "whyP",
@@ -654,7 +923,15 @@ const questions = [
    "(C) I ordered a hundred envelopes"
   ],
   "ans": 1,
-  "exp": "Lý do đói: chưa kịp ăn trưa. Bẫy gần âm: hungry → angry / hundred."
+  "exp": "Lý do đói: chưa kịp ăn trưa. Bẫy gần âm: hungry → angry / hundred.",
+  "listen": true,
+  "file": "cau-44.mp3",
+  "speak": [
+   "Why are you so hungry?",
+   "A. He really made me angry",
+   "B. I didn’t have time to eat lunch",
+   "C. I ordered a hundred envelopes"
+  ]
  },
  {
   "cat": "whyP",
@@ -665,26 +942,90 @@ const questions = [
    "(C) The heating system doesn’t work"
   ],
   "ans": 2,
-  "exp": "Lý do phòng lạnh: hệ thống sưởi hỏng."
+  "exp": "Lý do phòng lạnh: hệ thống sưởi hỏng.",
+  "listen": true,
+  "file": "cau-45.mp3",
+  "speak": [
+   "Why is it so cold in this room?",
+   "A. He told me to come here",
+   "B. This isn’t the right room",
+   "C. The heating system doesn’t work"
+  ]
  }
 ];
 const TOTAL_TIME = 3600;
-const catMap = {howT:'cat-noun', howP:'cat-adj', whyT:'cat-adv', whyP:'cat-mix'};
-const labelMap = {howT:'📗 Lý thuyết HOW', howP:'📙 Luyện HOW', whyT:'📘 Lý thuyết WHY', whyP:'🔀 Luyện WHY'};
+const AUDIO_DIR = 'audio/';   // đặt file mp3 theo tên cau-09.mp3, cau-10.mp3... vào thư mục này
+const catMap = {howT:'cat-howT', howP:'cat-howP', whyT:'cat-whyT', whyP:'cat-whyP'};
+const labelMap = {howT:'📗 Lý thuyết HOW', howP:'🎧 Nghe HOW', whyT:'📘 Lý thuyết WHY', whyP:'🎧 Nghe WHY'};
 const reviewTips = {
   howT:'<b>Lý thuyết HOW:</b> học lại bảng How + từ để hỏi: many → số lượng, much → tiền, often → tần suất, long → thời gian, far → khoảng cách, well → mức độ, get → phương tiện, can → cách thức.',
-  howP:'<b>Luyện HOW:</b> nghe kỹ TỪ NGAY SAU “How” rồi mới quyết định dạng câu trả lời; cảnh giác đáp án lặp lại từ trong câu hỏi (cost/costumes, contact/contract).',
+  howP:'<b>Nghe HOW:</b> nghe kỹ TỪ NGAY SAU “How” rồi mới quyết định dạng câu trả lời; cảnh giác đáp án lặp lại từ trong câu hỏi (cost/costumes, contact/contract).',
   whyT:'<b>Lý thuyết WHY:</b> nhớ 2 dạng trả lời — Because + mệnh đề và To + V; câu Wh- không bao giờ trả lời Yes/No.',
-  whyP:'<b>Luyện WHY:</b> tìm đáp án nêu ĐƯỢC nguyên nhân hoặc mục đích; loại đáp án chỉ lặp âm (bills → Bill, move → movie, late → ate).'
+  whyP:'<b>Nghe WHY:</b> tìm đáp án nêu được nguyên nhân hoặc mục đích; loại đáp án chỉ lặp âm (bills → Bill, move → movie, late → ate).'
 };
 let current = 0, answers = [], playerName = "", timerInterval, timeLeft = TOTAL_TIME, startTime;
+let rate = 1, audioEl = null, voice = null;
 
+function pickVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const vs = speechSynthesis.getVoices().filter(v => /en(-|_)(US|GB|AU)/i.test(v.lang));
+  const pref = vs.find(v => /Google US English|Aria|Guy|Jenny|Samantha/i.test(v.name));
+  return pref || vs[0] || null;
+}
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = () => { voice = pickVoice(); };
+  voice = pickVoice();
+}
+function setSpeaker(on) {
+  const s = document.getElementById('speakerIcon');
+  if (s) s.classList.toggle('playing', on);
+}
+function stopAudio() {
+  if (audioEl) { try { audioEl.pause(); } catch(e){} audioEl = null; }
+  if ('speechSynthesis' in window) { try { speechSynthesis.cancel(); } catch(e){} }
+  setSpeaker(false);
+}
+function speakLines(lines) {
+  if (!('speechSynthesis' in window)) {
+    const s = document.getElementById('listenStatus');
+    if (s) s.textContent = 'Trình duyệt không hỗ trợ đọc tự động — em hãy đọc thầm câu hỏi trong phần đáp án sau khi chọn.';
+    return;
+  }
+  setSpeaker(true);
+  lines.forEach((line, i) => {
+    const u = new SpeechSynthesisUtterance(line);
+    u.lang = 'en-US'; u.rate = rate * 0.95; u.pitch = 1;
+    if (voice) u.voice = voice;
+    if (i === lines.length - 1) u.onend = () => setSpeaker(false);
+    speechSynthesis.speak(u);
+  });
+}
+function playCurrent() {
+  const q = questions[current];
+  if (!q || !q.listen) return;
+  stopAudio();
+  const status = document.getElementById('listenStatus');
+  audioEl = new Audio(AUDIO_DIR + q.file);
+  audioEl.playbackRate = rate;
+  audioEl.onplaying = () => { setSpeaker(true); if (status) status.textContent = 'Đang phát file ghi âm…'; };
+  audioEl.onended = () => setSpeaker(false);
+  audioEl.onerror = () => { if (status) status.textContent = 'Đang đọc bằng giọng máy (chưa có file ghi âm).'; speakLines(q.speak); };
+  const p = audioEl.play();
+  if (p && p.catch) p.catch(() => { if (status) status.textContent = 'Đang đọc bằng giọng máy (chưa có file ghi âm).'; speakLines(q.speak); });
+}
+function setRate(r, btn) {
+  rate = r;
+  document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  playCurrent();
+}
 function startQuiz() {
   playerName = document.getElementById('playerName').value.trim() || "Học viên";
   current = 0; answers = new Array(questions.length).fill(-1);
   timeLeft = TOTAL_TIME; startTime = Date.now();
   document.getElementById('timer').textContent = '60:00';
   document.getElementById('timer').className = 'timer';
+  if ('speechSynthesis' in window) { const w = new SpeechSynthesisUtterance(' '); speechSynthesis.speak(w); }
   showScreen('quizScreen'); renderQuestion();
   clearInterval(timerInterval); timerInterval = setInterval(updateTimer, 1000);
 }
@@ -698,40 +1039,61 @@ function updateTimer() {
   const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
   const el = document.getElementById('timer');
   el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  el.className = 'timer' + (timeLeft <= 60 ? ' danger' : timeLeft <= 180 ? ' warning' : '');
+  el.className = 'timer' + (timeLeft <= 120 ? ' danger' : timeLeft <= 300 ? ' warning' : '');
 }
 function renderQuestion() {
   const q = questions[current];
   document.getElementById('qCounter').textContent = `Câu ${current + 1} / ${questions.length}`;
   document.getElementById('progressFill').style.width = `${(current / questions.length) * 100}%`;
   document.getElementById('nextBtn').style.display = 'none';
-  let h = `<span class="category-badge ${catMap[q.cat]}">${labelMap[q.cat]}</span>`;
-  h += `<div class="question-card"><div class="question-text">${current + 1}. ${q.q}</div><div class="options">`;
-  q.opts.forEach((opt, i) => { h += `<div class="option" data-idx="${i}" onclick="selectOption(${i})">${opt}</div>`; });
-  h += `</div><div class="explanation" id="explanation">💡 ${q.exp}</div></div>`;
+  let h = `<span class="category-badge ${catMap[q.cat]}">${labelMap[q.cat]}</span><div class="question-card">`;
+  if (q.listen) {
+    h += `<div class="listen-box">
+      <span class="speaker" id="speakerIcon">🔊</span>
+      <span class="listen-info"><b>Câu ${current + 1} — nghe và chọn đáp án</b><span id="listenStatus">Đang phát…</span></span>
+      <button class="mini" onclick="playCurrent()">↻ Nghe lại</button>
+      <button class="mini rate-btn" onclick="setRate(0.75,this)">0.75x</button>
+      <button class="mini rate-btn on" onclick="setRate(1,this)">1x</button>
+    </div>`;
+    h += `<div class="options">`;
+    q.opts.forEach((opt, i) => {
+      h += `<div class="option masked" data-idx="${i}" onclick="selectOption(${i})">(${'ABCD'[i]})<span class="dots">• • • • • • • •</span></div>`;
+    });
+  } else {
+    h += `<div class="question-text">${current + 1}. ${q.q}</div><div class="options">`;
+    q.opts.forEach((opt, i) => { h += `<div class="option" data-idx="${i}" onclick="selectOption(${i})">${opt}</div>`; });
+  }
+  h += `</div><div class="explanation" id="explanation"></div></div>`;
   document.getElementById('questionArea').innerHTML = h;
+  if (q.listen) setTimeout(playCurrent, 350);
 }
 function selectOption(idx) {
   if (answers[current] !== -1) return;
   answers[current] = idx;
+  stopAudio();
   const q = questions[current];
   document.querySelectorAll('#questionArea .option').forEach(o => {
     o.style.pointerEvents = 'none';
     const oi = parseInt(o.dataset.idx);
+    if (q.listen) { o.classList.remove('masked'); o.innerHTML = q.opts[oi]; }
     if (oi === q.ans) o.classList.add('correct');
     if (oi === idx && idx !== q.ans) o.classList.add('wrong');
   });
-  document.getElementById('explanation').classList.add('show');
+  const ex = document.getElementById('explanation');
+  ex.innerHTML = (q.listen ? `🎧 <b>Câu hỏi:</b> ${q.q}<br>` : '') + `💡 ${q.exp}`;
+  ex.classList.add('show');
   const nb = document.getElementById('nextBtn');
   nb.style.display = 'inline-block';
   nb.textContent = current === questions.length - 1 ? 'Xem kết quả' : 'Câu tiếp →';
 }
 function nextQuestion() {
+  stopAudio();
   current++;
   if (current >= questions.length) { clearInterval(timerInterval); finishQuiz(); return; }
   renderQuestion(); window.scrollTo(0, 0);
 }
 function finishQuiz() {
+  stopAudio();
   const elapsed = Math.floor((Date.now() - startTime) / 1000);
   const cats = {howT:{c:0,t:0}, howP:{c:0,t:0}, whyT:{c:0,t:0}, whyP:{c:0,t:0}};
   let total = 0;
@@ -741,10 +1103,10 @@ function finishQuiz() {
   document.getElementById('scorePct').textContent = pct + '%';
   document.getElementById('rawScore').textContent = `${total} / ${questions.length} câu đúng`;
   let grade, msg;
-  if (pct >= 90) { grade = "🌟 Xuất sắc!"; msg = "Bạn nắm rất vững dạng câu hỏi HOW – WHY."; }
+  if (pct >= 90) { grade = "🌟 Xuất sắc!"; msg = "Phản xạ HOW – WHY rất tốt."; }
   else if (pct >= 75) { grade = "👍 Tốt!"; msg = "Nền tảng chắc — xem lại các câu sai là ổn."; }
   else if (pct >= 50) { grade = "📝 Khá"; msg = "Cần ôn lại phần có điểm thấp nhất bên dưới."; }
-  else { grade = "💪 Cần cố gắng thêm"; msg = "Hãy xem lại slide Day 6 rồi làm lại bài nhé!"; }
+  else { grade = "💪 Cần cố gắng thêm"; msg = "Hãy xem lại slide Day 6 rồi nghe lại bài này nhé!"; }
   document.getElementById('grade').textContent = grade;
   document.getElementById('gradeMsg').textContent = msg;
   const weak = [];
@@ -771,7 +1133,7 @@ function finishQuiz() {
   }).join('');
   showScreen('resultScreen');
 }
-function retryQuiz() { showScreen('startScreen'); }
+function retryQuiz() { stopAudio(); showScreen('startScreen'); }
 function renderReview(filter, btn) {
   if (btn) { document.querySelectorAll('#filterRow button').forEach(b => b.classList.remove('on')); btn.classList.add('on'); }
   const html = questions.map((q, i) => {
