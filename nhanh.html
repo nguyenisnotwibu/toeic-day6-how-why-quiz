@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Day 6 - Quiz nhanh 15 phút: HOW &amp; WHY</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:#0f172a; color:#e2e8f0; min-height:100vh; }
+  .screen { display:none; max-width:720px; margin:0 auto; padding:20px 16px; }
+  .screen.active { display:block; }
+  .start-card { text-align:center; padding:44px 10px; }
+  .brand { font-size:.8em; letter-spacing:2px; color:#64748b; text-transform:uppercase; margin-bottom:10px; }
+  .start-card h1 { font-size:2em; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; }
+  .start-card .subtitle { color:#94a3b8; font-size:1em; margin-bottom:24px; }
+  .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; text-align:left; }
+  .info-box { background:#1e293b; border-radius:12px; padding:16px; border:1px solid #334155; }
+  .info-box .label { font-size:.75em; color:#64748b; text-transform:uppercase; letter-spacing:1px; }
+  .info-box .value { font-size:1.05em; font-weight:600; color:#f1f5f9; margin-top:4px; }
+  .scope { background:#1e293b; border:1px solid #334155; border-radius:12px; padding:16px 18px; text-align:left; margin-bottom:18px; font-size:.9em; line-height:1.8; color:#cbd5e1; }
+  .scope b { color:#f1f5f9; }
+  .audio-note { background:rgba(59,130,246,.08); border:1px solid rgba(96,165,250,.35); border-radius:12px; padding:12px 16px; text-align:left; margin-bottom:22px; font-size:.86em; line-height:1.7; color:#bfdbfe; }
+  .name-input { width:100%; max-width:350px; padding:14px 20px; border-radius:12px; border:2px solid #334155; background:#1e293b; color:#f1f5f9; font-size:1em; text-align:center; margin-bottom:18px; outline:none; transition:border .2s; }
+  .name-input:focus { border-color:#60a5fa; }
+  .btn { padding:14px 40px; border-radius:12px; border:none; font-size:1.05em; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
+  .btn-primary { background:linear-gradient(135deg,#3b82f6,#8b5cf6); color:#fff; }
+  .btn-primary:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(59,130,246,.35); }
+  .btn-secondary { background:#1e293b; color:#94a3b8; border:1px solid #334155; }
+  .btn-secondary:hover { background:#334155; color:#f1f5f9; }
+  .quiz-header { display:flex; justify-content:space-between; align-items:center; padding:16px 0; margin-bottom:16px; border-bottom:1px solid #1e293b; }
+  .timer { font-size:1.4em; font-weight:700; font-variant-numeric:tabular-nums; }
+  .timer.warning { color:#f59e0b; } .timer.danger { color:#ef4444; animation:pulse 1s infinite; }
+  @keyframes pulse { 50% { opacity:.5; } }
+  .progress-bar { width:100%; height:6px; background:#1e293b; border-radius:3px; margin-bottom:20px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,#3b82f6,#8b5cf6); border-radius:3px; transition:width .4s ease; }
+  .q-counter { font-size:.85em; color:#64748b; }
+  .category-badge { display:inline-block; padding:4px 12px; border-radius:20px; font-size:.75em; font-weight:600; text-transform:uppercase; letter-spacing:.5px; margin-bottom:12px; }
+  .cat-howT { background:rgba(52,211,153,.15); color:#34d399; }
+  .cat-howP { background:rgba(251,146,60,.15); color:#fb923c; }
+  .cat-whyT { background:rgba(96,165,250,.15); color:#60a5fa; }
+  .cat-whyP { background:rgba(168,85,247,.15); color:#a855f7; }
+  .question-card { background:#1e293b; border-radius:16px; padding:26px; margin-bottom:16px; border:1px solid #334155; }
+  .question-text { font-size:1.12em; font-weight:600; line-height:1.55; margin-bottom:20px; }
+  .listen-box { display:flex; align-items:center; gap:14px; flex-wrap:wrap; background:#0f172a; border:1px solid #334155; border-radius:14px; padding:18px; margin-bottom:20px; }
+  .speaker { font-size:2em; line-height:1; }
+  .speaker.playing { animation:beat .9s ease-in-out infinite; }
+  @keyframes beat { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.15); opacity:.7; } }
+  .listen-info { flex:1; min-width:150px; font-size:.9em; color:#94a3b8; line-height:1.5; }
+  .listen-info b { color:#f1f5f9; display:block; font-size:1.05em; margin-bottom:2px; }
+  .mini { padding:8px 14px; border-radius:20px; border:1px solid #334155; background:#1e293b; color:#cbd5e1; cursor:pointer; font-family:inherit; font-size:.85em; font-weight:600; }
+  .mini:hover { border-color:#60a5fa; color:#f1f5f9; }
+  .mini.on { background:#172554; border-color:#60a5fa; color:#93c5fd; }
+  .options { display:flex; flex-direction:column; gap:10px; }
+  .option { padding:14px 18px; border-radius:12px; border:2px solid #334155; background:#0f172a; cursor:pointer; transition:all .2s; font-size:.95em; line-height:1.4; }
+  .option:hover { border-color:#60a5fa; background:#172554; }
+  .option.masked { font-weight:700; letter-spacing:1px; color:#94a3b8; }
+  .option.masked .dots { color:#475569; font-weight:400; letter-spacing:3px; margin-left:8px; }
+  .option.correct { border-color:#22c55e; background:rgba(34,197,94,.12); }
+  .option.wrong { border-color:#ef4444; background:rgba(239,68,68,.12); }
+  .explanation { margin-top:16px; padding:14px 18px; background:#0f172a; border-radius:12px; border-left:3px solid #8b5cf6; font-size:.9em; line-height:1.6; color:#cbd5e1; display:none; }
+  .explanation b { color:#fbbf24; }
+  .explanation.show { display:block; }
+  .next-btn-wrap { text-align:right; margin-top:16px; }
+  .result-header { text-align:center; padding:30px 0 20px; }
+  .score-circle { width:160px; height:160px; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; flex-direction:column; position:relative; }
+  .score-circle::before { content:''; position:absolute; inset:0; border-radius:50%; padding:4px; background:conic-gradient(#3b82f6 var(--pct), #1e293b var(--pct)); -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite:xor; mask-composite:exclude; }
+  .score-circle .pct { font-size:2.5em; font-weight:800; background:linear-gradient(135deg,#60a5fa,#a78bfa); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+  .score-circle .label { font-size:.8em; color:#94a3b8; }
+  .raw { color:#cbd5e1; font-weight:600; margin-bottom:8px; }
+  .grade { font-size:1.3em; font-weight:700; margin-bottom:6px; }
+  .grade-msg { color:#94a3b8; margin-bottom:24px; }
+  .breakdown { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px; }
+  .break-card { background:#1e293b; border-radius:14px; padding:18px; text-align:center; border:1px solid #334155; }
+  .break-card .bc-label { font-size:.7em; text-transform:uppercase; letter-spacing:1px; color:#64748b; margin-bottom:6px; }
+  .break-card .bc-pct { font-size:1.8em; font-weight:800; }
+  .break-card .bc-detail { font-size:.8em; color:#94a3b8; margin-top:4px; }
+  .bc-howT .bc-pct { color:#34d399; } .bc-howP .bc-pct { color:#fb923c; }
+  .bc-whyT .bc-pct { color:#60a5fa; } .bc-whyP .bc-pct { color:#a855f7; }
+  .advice-box { background:#1e293b; border:1px solid #334155; border-left:3px solid #f59e0b; border-radius:12px; padding:14px 18px; margin-bottom:26px; font-size:.9em; line-height:1.7; color:#cbd5e1; }
+  .advice-box b { color:#fbbf24; }
+  .lb-title { font-size:1.2em; font-weight:700; margin-bottom:14px; }
+  .lb-table { width:100%; border-collapse:collapse; margin-bottom:24px; }
+  .lb-table th { text-align:left; padding:10px 12px; font-size:.75em; text-transform:uppercase; letter-spacing:1px; color:#64748b; border-bottom:1px solid #334155; }
+  .lb-table td { padding:12px; border-bottom:1px solid #1e293b; }
+  .lb-table tr.me { background:#172554; }
+  .lb-rank { font-weight:700; width:40px; } .lb-name { font-weight:600; }
+  .lb-score { font-weight:700; color:#60a5fa; text-align:right; } .lb-time { color:#94a3b8; font-size:.85em; text-align:right; }
+  .action-row { display:flex; gap:12px; justify-content:center; margin-top:20px; flex-wrap:wrap; }
+  .filter-row { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+  .filter-row button { padding:8px 14px; border-radius:20px; border:1px solid #334155; background:#1e293b; color:#94a3b8; cursor:pointer; font-family:inherit; font-size:.85em; }
+  .filter-row button.on { background:#172554; color:#f1f5f9; border-color:#60a5fa; }
+  .footer { text-align:center; color:#475569; font-size:.75em; margin-top:30px; }
+  @media (max-width:520px){ .btn{ padding:13px 26px; } .question-card{ padding:20px; } }
+</style>
+</head>
+<body>
+
+<div class="screen active" id="startScreen">
+  <div class="start-card">
+    <div class="brand">TOEIC · Thầy Vũ Nguyên</div>
+    <h1>DAY 6 — QUIZ NHANH</h1>
+    <p class="subtitle">HOW &amp; WHY — 20 câu kiểm tra nhanh đầu giờ</p>
+    <div class="info-grid">
+      <div class="info-box"><div class="label">Nội dung</div><div class="value">Part 2 — HOW &amp; WHY</div></div>
+      <div class="info-box"><div class="label">Phạm vi</div><div class="value">Day 6</div></div>
+      <div class="info-box"><div class="label">Thời gian</div><div class="value">15 phút</div></div>
+      <div class="info-box"><div class="label">Số câu</div><div class="value">20 câu</div></div>
+    </div>
+    <div class="scope">
+      📗 <b>Lý thuyết HOW (3 câu):</b> How many / much / often / long / far, How + be, How + get, How + can<br>
+      📙 <b>Luyện nghe HOW (7 câu):</b> nghe câu hỏi + 3 lựa chọn, chọn đáp án đúng<br>
+      📘 <b>Lý thuyết WHY (3 câu):</b> trả lời Because / To V, loại đáp án Yes-No, bẫy đồng âm<br>
+      🔀 <b>Luyện nghe WHY (7 câu):</b> nghe câu hỏi + 3 lựa chọn, chọn đáp án đúng
+    </div>
+    <div class="audio-note">
+      🎧 <b>Phần luyện nghe:</b> audio tự động phát ngay khi câu hỏi hiện ra, và <b>lựa chọn A / B / C bị che</b> — chỉ hiện ra sau khi em chọn xong, kèm đáp án đúng và giải thích.<br>
+      Hãy bật loa hoặc đeo tai nghe trước khi bắt đầu. Có nút <b>Nghe lại</b> và chỉnh tốc độ 0.75x / 1x.
+    </div>
+    <input class="name-input" id="playerName" placeholder="Nhập tên của bạn..." maxlength="30" />
+    <br>
+    <button class="btn btn-primary" onclick="startQuiz()">BẮT ĐẦU LÀM BÀI</button>
+  </div>
+</div>
+
+<div class="screen" id="quizScreen">
+  <div class="quiz-header">
+    <span class="q-counter" id="qCounter">Câu 1 / 20</span>
+    <span class="timer" id="timer">15:00</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div id="questionArea"></div>
+  <div class="next-btn-wrap">
+    <button class="btn btn-primary" id="nextBtn" onclick="nextQuestion()" style="display:none">Câu tiếp →</button>
+  </div>
+</div>
+
+<div class="screen" id="resultScreen">
+  <div class="result-header">
+    <div class="score-circle" id="scoreCircle"><span class="pct" id="scorePct">0%</span><span class="label">Tổng điểm</span></div>
+    <div class="raw" id="rawScore"></div>
+    <div class="grade" id="grade"></div>
+    <div class="grade-msg" id="gradeMsg"></div>
+  </div>
+  <div class="breakdown">
+    <div class="break-card bc-howT"><div class="bc-label">Lý thuyết HOW</div><div class="bc-pct" id="howTPct">0%</div><div class="bc-detail" id="howTDetail"></div></div>
+    <div class="break-card bc-howP"><div class="bc-label">Nghe HOW</div><div class="bc-pct" id="howPPct">0%</div><div class="bc-detail" id="howPDetail"></div></div>
+    <div class="break-card bc-whyT"><div class="bc-label">Lý thuyết WHY</div><div class="bc-pct" id="whyTPct">0%</div><div class="bc-detail" id="whyTDetail"></div></div>
+    <div class="break-card bc-whyP"><div class="bc-label">Nghe WHY</div><div class="bc-pct" id="whyPPct">0%</div><div class="bc-detail" id="whyPDetail"></div></div>
+  </div>
+  <div class="advice-box" id="adviceBox"></div>
+  <div class="lb-title">🏆 Bảng xếp hạng</div>
+  <table class="lb-table"><thead><tr><th>#</th><th>Tên</th><th style="text-align:right">Điểm</th><th style="text-align:right">Thời gian</th></tr></thead><tbody id="lbBody"></tbody></table>
+  <div class="action-row">
+    <button class="btn btn-primary" onclick="retryQuiz()">Làm lại</button>
+    <button class="btn btn-secondary" onclick="showAnswers()">Xem đáp án</button>
+  </div>
+</div>
+
+<div class="screen" id="reviewScreen">
+  <h2 style="margin-bottom:16px;font-size:1.4em">📋 Đáp án chi tiết</h2>
+  <div class="filter-row" id="filterRow">
+    <button class="on" onclick="renderReview('all',this)">Tất cả</button>
+    <button onclick="renderReview('wrong',this)">Câu sai</button>
+    <button onclick="renderReview('howT',this)">LT HOW</button>
+    <button onclick="renderReview('howP',this)">Nghe HOW</button>
+    <button onclick="renderReview('whyT',this)">LT WHY</button>
+    <button onclick="renderReview('whyP',this)">Nghe WHY</button>
+  </div>
+  <div id="reviewArea"></div>
+  <div class="action-row" style="margin-top:24px">
+    <button class="btn btn-primary" onclick="retryQuiz()">Làm lại</button>
+    <button class="btn btn-secondary" onclick="backToResult()">← Kết quả</button>
+  </div>
+  <div class="footer">TOEIC Day 6 · Quiz nhanh 15 phút · Thầy Vũ Nguyên</div>
+</div>
+
+<script>
+const questions = [
+ {
+  "cat": "howT",
+  "q": "“How many…?” hỏi về điều gì?",
+  "opts": [
+   "(A) Số lượng đếm được (15, 20, hundred, thousand…)",
+   "(B) Giá tiền",
+   "(C) Khoảng thời gian",
+   "(D) Khoảng cách"
+  ],
+  "ans": 0,
+  "exp": "How many + N đếm được → trả lời bằng SỐ LƯỢNG: ten, thirty letters, a hundred…",
+  "listen": false
+ },
+ {
+  "cat": "howT",
+  "q": "“How often…?” cần câu trả lời chứa từ nào?",
+  "opts": [
+   "(A) until 6 p.m.",
+   "(B) every day / three times a year",
+   "(C) five kilometers",
+   "(D) by taxi"
+  ],
+  "ans": 1,
+  "exp": "How often hỏi TẦN SUẤT → every…, once/twice/3 times…, whenever…",
+  "listen": false
+ },
+ {
+  "cat": "howT",
+  "q": "“How do you get here?” hỏi về điều gì?",
+  "opts": [
+   "(A) Lý do đến đây",
+   "(B) Thời gian đến",
+   "(C) Phương tiện đi lại (by subway, by cab)",
+   "(D) Người đi cùng"
+  ],
+  "ans": 2,
+  "exp": "How + get/go → PHƯƠNG TIỆN: by motorbike, cab, subway; hoặc “someone gave me a ride/lift”.",
+  "listen": false
+ },
+ {
+  "cat": "howP",
+  "q": "How much time will we have to do the work?",
+  "opts": [
+   "(A) We have until next week",
+   "(B) We worked all night",
+   "(C) I don’t have a watch"
+  ],
+  "ans": 0,
+  "exp": "How much time → khoảng thời gian cho phép. (b) và (c) chỉ lặp âm work / time.",
+  "listen": true,
+  "file": "cau-09.mp3",
+  "speak": [
+   "How much time will we have to do the work?",
+   "A. We have until next week",
+   "B. We worked all night",
+   "C. I don’t have a watch"
+  ]
+ },
+ {
+  "cat": "howP",
+  "q": "How often do you take a business trip?",
+  "opts": [
+   "(A) Our business didn’t do well this year",
+   "(B) I always go by plane",
+   "(C) I travel about three times a year"
+  ],
+  "ans": 2,
+  "exp": "How often → tần suất: three times a year. (b) trả lời cho How do you go.",
+  "listen": true,
+  "file": "cau-14.mp3",
+  "speak": [
+   "How often do you take a business trip?",
+   "A. Our business didn’t do well this year",
+   "B. I always go by plane",
+   "C. I travel about three times a year"
+  ]
+ },
+ {
+  "cat": "howP",
+  "q": "How far is your office from here?",
+  "opts": [
+   "(A) This office is too small",
+   "(B) It’s only two blocks away",
+   "(C) I come here every day"
+  ],
+  "ans": 1,
+  "exp": "How far → khoảng cách: two blocks away.",
+  "listen": true,
+  "file": "cau-18.mp3",
+  "speak": [
+   "How far is your office from here?",
+   "A. This office is too small",
+   "B. It’s only two blocks away",
+   "C. I come here every day"
+  ]
+ },
+ {
+  "cat": "howP",
+  "q": "How much does a new computer cost?",
+  "opts": [
+   "(A) She has 10 different costumes",
+   "(B) A basic model costs about 800 dollars",
+   "(C) We need some new computers"
+  ],
+  "ans": 1,
+  "exp": "How much + cost → số tiền. Bẫy đồng âm: cost / costumes.",
+  "listen": true,
+  "file": "cau-21.mp3",
+  "speak": [
+   "How much does a new computer cost?",
+   "A. She has 10 different costumes",
+   "B. A basic model costs about 800 dollars",
+   "C. We need some new computers"
+  ]
+ },
+ {
+  "cat": "howP",
+  "q": "How did you get to New York?",
+  "opts": [
+   "(A) I took a train",
+   "(B) It’s a very interesting city",
+   "(C) I got it at a store"
+  ],
+  "ans": 0,
+  "exp": "How did you get to → phương tiện: took a train.",
+  "listen": true,
+  "file": "cau-23.mp3",
+  "speak": [
+   "How did you get to New York?",
+   "A. I took a train",
+   "B. It’s a very interesting city",
+   "C. I got it at a store"
+  ]
+ },
+ {
+  "cat": "howP",
+  "q": "How did you like the movie?",
+  "opts": [
+   "(A) It lasted about 2 hours",
+   "(B) The next one starts at 5 o’clock",
+   "(C) I thought it was boring"
+  ],
+  "ans": 2,
+  "exp": "How did you like → hỏi CẢM NHẬN, trả lời bằng nhận xét: boring.",
+  "listen": true,
+  "file": "cau-24.mp3",
+  "speak": [
+   "How did you like the movie?",
+   "A. It lasted about 2 hours",
+   "B. The next one starts at 5 o’clock",
+   "C. I thought it was boring"
+  ]
+ },
+ {
+  "cat": "howP",
+  "q": "How long will it take to finish that report?",
+  "opts": [
+   "(A) I’ll report it to the manager",
+   "(B) It’s about 20 pages long",
+   "(C) I’ll have it finished by next week"
+  ],
+  "ans": 2,
+  "exp": "How long will it take → thời gian hoàn thành: by next week. (b) là bẫy “long = pages”.",
+  "listen": true,
+  "file": "cau-22.mp3",
+  "speak": [
+   "How long will it take to finish that report?",
+   "A. I’ll report it to the manager",
+   "B. It’s about 20 pages long",
+   "C. I’ll have it finished by next week"
+  ]
+ },
+ {
+  "cat": "whyT",
+  "q": "Câu hỏi “Why…?” KHÔNG được trả lời bằng dạng nào sau đây?",
+  "opts": [
+   "(A) Because + mệnh đề",
+   "(B) To + V (mục đích)",
+   "(C) Yes / No",
+   "(D) Một mệnh đề nêu nguyên nhân (It needs new batteries)"
+  ],
+  "ans": 2,
+  "exp": "Wh-question không bao giờ trả lời Yes/No — loại ngay đáp án bắt đầu bằng Yes/No.",
+  "listen": false
+ },
+ {
+  "cat": "whyT",
+  "q": "“Why did you send Tom a card?” — dạng trả lời nào hợp lý nhất?",
+  "opts": [
+   "(A) To wish him a happy birthday",
+   "(B) I bought a new car",
+   "(C) I’ve been working too hard"
+  ],
+  "ans": 0,
+  "exp": "Why có thể trả lời bằng TO + V chỉ mục đích, không nhất thiết phải có Because.",
+  "listen": false
+ },
+ {
+  "cat": "whyT",
+  "q": "Bẫy thường gặp nhất trong câu hỏi Why là gì?",
+  "opts": [
+   "(A) Đáp án lặp lại từ đồng âm/gần âm trong câu hỏi",
+   "(B) Đáp án quá dài",
+   "(C) Đáp án dùng thì hiện tại",
+   "(D) Đáp án có tên riêng"
+  ],
+  "ans": 0,
+  "exp": "Ví dụ: bills → Bill, finished → finish line, printer → printings. Nghe thấy từ giống hệt thì cảnh giác.",
+  "listen": false
+ },
+ {
+  "cat": "whyP",
+  "q": "Why are these bills overdue?",
+  "opts": [
+   "(A) We paid them last month",
+   "(B) There’s no money in our account",
+   "(C) Bill is due here any minute"
+  ],
+  "ans": 1,
+  "exp": "Lý do hóa đơn quá hạn: không còn tiền trong tài khoản. Bẫy: bills → Bill (tên người).",
+  "listen": true,
+  "file": "cau-32.mp3",
+  "speak": [
+   "Why are these bills overdue?",
+   "A. We paid them last month",
+   "B. There’s no money in our account",
+   "C. Bill is due here any minute"
+  ]
+ },
+ {
+  "cat": "whyP",
+  "q": "Why doesn’t this phone work?",
+  "opts": [
+   "(A) It needs new batteries",
+   "(B) You can call me at work",
+   "(C) He works alone"
+  ],
+  "ans": 0,
+  "exp": "Lý do điện thoại hỏng: hết pin. Bẫy lặp từ: work.",
+  "listen": true,
+  "file": "cau-36.mp3",
+  "speak": [
+   "Why doesn’t this phone work?",
+   "A. It needs new batteries",
+   "B. You can call me at work",
+   "C. He works alone"
+  ]
+ },
+ {
+  "cat": "whyP",
+  "q": "Why did he move to California?",
+  "opts": [
+   "(A) It was a very good movie",
+   "(B) He got a job there",
+   "(C) John helped me move it"
+  ],
+  "ans": 1,
+  "exp": "Lý do chuyển đến: có việc làm ở đó. Bẫy gần âm: move → movie.",
+  "listen": true,
+  "file": "cau-37.mp3",
+  "speak": [
+   "Why did he move to California?",
+   "A. It was a very good movie",
+   "B. He got a job there",
+   "C. John helped me move it"
+  ]
+ },
+ {
+  "cat": "whyP",
+  "q": "Why were you late?",
+  "opts": [
+   "(A) My car wouldn’t start",
+   "(B) I ate lunch already",
+   "(C) He’ll have to wait"
+  ],
+  "ans": 0,
+  "exp": "Lý do đến muộn: xe không nổ máy. Bẫy gần âm: late → ate / wait.",
+  "listen": true,
+  "file": "cau-43.mp3",
+  "speak": [
+   "Why were you late?",
+   "A. My car wouldn’t start",
+   "B. I ate lunch already",
+   "C. He’ll have to wait"
+  ]
+ },
+ {
+  "cat": "whyP",
+  "q": "Why are you so hungry?",
+  "opts": [
+   "(A) He really made me angry",
+   "(B) I didn’t have time to eat lunch",
+   "(C) I ordered a hundred envelopes"
+  ],
+  "ans": 1,
+  "exp": "Lý do đói: chưa kịp ăn trưa. Bẫy gần âm: hungry → angry / hundred.",
+  "listen": true,
+  "file": "cau-44.mp3",
+  "speak": [
+   "Why are you so hungry?",
+   "A. He really made me angry",
+   "B. I didn’t have time to eat lunch",
+   "C. I ordered a hundred envelopes"
+  ]
+ },
+ {
+  "cat": "whyP",
+  "q": "Why are you sitting next to the door?",
+  "opts": [
+   "(A) I may have to leave early",
+   "(B) The doors are closed",
+   "(C) They live next door"
+  ],
+  "ans": 0,
+  "exp": "Lý do ngồi cạnh cửa: có thể phải về sớm. Bẫy lặp từ: door.",
+  "listen": true,
+  "file": "cau-40.mp3",
+  "speak": [
+   "Why are you sitting next to the door?",
+   "A. I may have to leave early",
+   "B. The doors are closed",
+   "C. They live next door"
+  ]
+ },
+ {
+  "cat": "whyP",
+  "q": "Why is it so cold in this room?",
+  "opts": [
+   "(A) He told me to come here",
+   "(B) This isn’t the right room",
+   "(C) The heating system doesn’t work"
+  ],
+  "ans": 2,
+  "exp": "Lý do phòng lạnh: hệ thống sưởi hỏng.",
+  "listen": true,
+  "file": "cau-45.mp3",
+  "speak": [
+   "Why is it so cold in this room?",
+   "A. He told me to come here",
+   "B. This isn’t the right room",
+   "C. The heating system doesn’t work"
+  ]
+ }
+];
+const TOTAL_TIME = 900;
+const AUDIO_DIR = 'audio/';   // đặt file mp3 theo tên cau-09.mp3, cau-10.mp3... vào thư mục này
+const catMap = {howT:'cat-howT', howP:'cat-howP', whyT:'cat-whyT', whyP:'cat-whyP'};
+const labelMap = {howT:'📗 Lý thuyết HOW', howP:'🎧 Nghe HOW', whyT:'📘 Lý thuyết WHY', whyP:'🎧 Nghe WHY'};
+const reviewTips = {
+  howT:'<b>Lý thuyết HOW:</b> học lại bảng How + từ để hỏi: many → số lượng, much → tiền, often → tần suất, long → thời gian, far → khoảng cách, well → mức độ, get → phương tiện, can → cách thức.',
+  howP:'<b>Nghe HOW:</b> nghe kỹ TỪ NGAY SAU “How” rồi mới quyết định dạng câu trả lời; cảnh giác đáp án lặp lại từ trong câu hỏi (cost/costumes, contact/contract).',
+  whyT:'<b>Lý thuyết WHY:</b> nhớ 2 dạng trả lời — Because + mệnh đề và To + V; câu Wh- không bao giờ trả lời Yes/No.',
+  whyP:'<b>Nghe WHY:</b> tìm đáp án nêu được nguyên nhân hoặc mục đích; loại đáp án chỉ lặp âm (bills → Bill, move → movie, late → ate).'
+};
+let current = 0, answers = [], playerName = "", timerInterval, timeLeft = TOTAL_TIME, startTime;
+let rate = 1, audioEl = null, voice = null;
+
+function pickVoice() {
+  if (!('speechSynthesis' in window)) return null;
+  const vs = speechSynthesis.getVoices().filter(v => /en(-|_)(US|GB|AU)/i.test(v.lang));
+  const pref = vs.find(v => /Google US English|Aria|Guy|Jenny|Samantha/i.test(v.name));
+  return pref || vs[0] || null;
+}
+if ('speechSynthesis' in window) {
+  speechSynthesis.onvoiceschanged = () => { voice = pickVoice(); };
+  voice = pickVoice();
+}
+function setSpeaker(on) {
+  const s = document.getElementById('speakerIcon');
+  if (s) s.classList.toggle('playing', on);
+}
+function stopAudio() {
+  if (audioEl) { try { audioEl.pause(); } catch(e){} audioEl = null; }
+  if ('speechSynthesis' in window) { try { speechSynthesis.cancel(); } catch(e){} }
+  setSpeaker(false);
+}
+function speakLines(lines) {
+  if (!('speechSynthesis' in window)) {
+    const s = document.getElementById('listenStatus');
+    if (s) s.textContent = 'Trình duyệt không hỗ trợ đọc tự động — em hãy đọc thầm câu hỏi trong phần đáp án sau khi chọn.';
+    return;
+  }
+  setSpeaker(true);
+  lines.forEach((line, i) => {
+    const u = new SpeechSynthesisUtterance(line);
+    u.lang = 'en-US'; u.rate = rate * 0.95; u.pitch = 1;
+    if (voice) u.voice = voice;
+    if (i === lines.length - 1) u.onend = () => setSpeaker(false);
+    speechSynthesis.speak(u);
+  });
+}
+function playCurrent() {
+  const q = questions[current];
+  if (!q || !q.listen) return;
+  stopAudio();
+  const status = document.getElementById('listenStatus');
+  audioEl = new Audio(AUDIO_DIR + q.file);
+  audioEl.playbackRate = rate;
+  audioEl.onplaying = () => { setSpeaker(true); if (status) status.textContent = 'Đang phát file ghi âm…'; };
+  audioEl.onended = () => setSpeaker(false);
+  audioEl.onerror = () => { if (status) status.textContent = 'Đang đọc bằng giọng máy (chưa có file ghi âm).'; speakLines(q.speak); };
+  const p = audioEl.play();
+  if (p && p.catch) p.catch(() => { if (status) status.textContent = 'Đang đọc bằng giọng máy (chưa có file ghi âm).'; speakLines(q.speak); });
+}
+function setRate(r, btn) {
+  rate = r;
+  document.querySelectorAll('.rate-btn').forEach(b => b.classList.remove('on'));
+  if (btn) btn.classList.add('on');
+  playCurrent();
+}
+function startQuiz() {
+  playerName = document.getElementById('playerName').value.trim() || "Học viên";
+  current = 0; answers = new Array(questions.length).fill(-1);
+  timeLeft = TOTAL_TIME; startTime = Date.now();
+  document.getElementById('timer').textContent = '15:00';
+  document.getElementById('timer').className = 'timer';
+  if ('speechSynthesis' in window) { const w = new SpeechSynthesisUtterance(' '); speechSynthesis.speak(w); }
+  showScreen('quizScreen'); renderQuestion();
+  clearInterval(timerInterval); timerInterval = setInterval(updateTimer, 1000);
+}
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active'); window.scrollTo(0, 0);
+}
+function updateTimer() {
+  timeLeft--;
+  if (timeLeft <= 0) { clearInterval(timerInterval); finishQuiz(); return; }
+  const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+  const el = document.getElementById('timer');
+  el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  el.className = 'timer' + (timeLeft <= 60 ? ' danger' : timeLeft <= 180 ? ' warning' : '');
+}
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('qCounter').textContent = `Câu ${current + 1} / ${questions.length}`;
+  document.getElementById('progressFill').style.width = `${(current / questions.length) * 100}%`;
+  document.getElementById('nextBtn').style.display = 'none';
+  let h = `<span class="category-badge ${catMap[q.cat]}">${labelMap[q.cat]}</span><div class="question-card">`;
+  if (q.listen) {
+    h += `<div class="listen-box">
+      <span class="speaker" id="speakerIcon">🔊</span>
+      <span class="listen-info"><b>Câu ${current + 1} — nghe và chọn đáp án</b><span id="listenStatus">Đang phát…</span></span>
+      <button class="mini" onclick="playCurrent()">↻ Nghe lại</button>
+      <button class="mini rate-btn" onclick="setRate(0.75,this)">0.75x</button>
+      <button class="mini rate-btn on" onclick="setRate(1,this)">1x</button>
+    </div>`;
+    h += `<div class="options">`;
+    q.opts.forEach((opt, i) => {
+      h += `<div class="option masked" data-idx="${i}" onclick="selectOption(${i})">(${'ABCD'[i]})<span class="dots">• • • • • • • •</span></div>`;
+    });
+  } else {
+    h += `<div class="question-text">${current + 1}. ${q.q}</div><div class="options">`;
+    q.opts.forEach((opt, i) => { h += `<div class="option" data-idx="${i}" onclick="selectOption(${i})">${opt}</div>`; });
+  }
+  h += `</div><div class="explanation" id="explanation"></div></div>`;
+  document.getElementById('questionArea').innerHTML = h;
+  if (q.listen) setTimeout(playCurrent, 350);
+}
+function selectOption(idx) {
+  if (answers[current] !== -1) return;
+  answers[current] = idx;
+  stopAudio();
+  const q = questions[current];
+  document.querySelectorAll('#questionArea .option').forEach(o => {
+    o.style.pointerEvents = 'none';
+    const oi = parseInt(o.dataset.idx);
+    if (q.listen) { o.classList.remove('masked'); o.innerHTML = q.opts[oi]; }
+    if (oi === q.ans) o.classList.add('correct');
+    if (oi === idx && idx !== q.ans) o.classList.add('wrong');
+  });
+  const ex = document.getElementById('explanation');
+  ex.innerHTML = (q.listen ? `🎧 <b>Câu hỏi:</b> ${q.q}<br>` : '') + `💡 ${q.exp}`;
+  ex.classList.add('show');
+  const nb = document.getElementById('nextBtn');
+  nb.style.display = 'inline-block';
+  nb.textContent = current === questions.length - 1 ? 'Xem kết quả' : 'Câu tiếp →';
+}
+function nextQuestion() {
+  stopAudio();
+  current++;
+  if (current >= questions.length) { clearInterval(timerInterval); finishQuiz(); return; }
+  renderQuestion(); window.scrollTo(0, 0);
+}
+function finishQuiz() {
+  stopAudio();
+  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const cats = {howT:{c:0,t:0}, howP:{c:0,t:0}, whyT:{c:0,t:0}, whyP:{c:0,t:0}};
+  let total = 0;
+  questions.forEach((q, i) => { cats[q.cat].t++; if (answers[i] === q.ans) { cats[q.cat].c++; total++; } });
+  const pct = Math.round((total / questions.length) * 100);
+  document.getElementById('scoreCircle').style.setProperty('--pct', `${pct * 3.6}deg`);
+  document.getElementById('scorePct').textContent = pct + '%';
+  document.getElementById('rawScore').textContent = `${total} / ${questions.length} câu đúng`;
+  let grade, msg;
+  if (pct >= 90) { grade = "🌟 Xuất sắc!"; msg = "Phản xạ HOW – WHY rất tốt."; }
+  else if (pct >= 75) { grade = "👍 Tốt!"; msg = "Nền tảng chắc — xem lại các câu sai là ổn."; }
+  else if (pct >= 50) { grade = "📝 Khá"; msg = "Cần ôn lại phần có điểm thấp nhất bên dưới."; }
+  else { grade = "💪 Cần cố gắng thêm"; msg = "Xem lại slide Day 6 rồi làm bản đầy đủ 45 câu nhé!"; }
+  document.getElementById('grade').textContent = grade;
+  document.getElementById('gradeMsg').textContent = msg;
+  const weak = [];
+  Object.keys(cats).forEach(k => {
+    const p = cats[k].t ? Math.round(cats[k].c / cats[k].t * 100) : 0;
+    document.getElementById(k + 'Pct').textContent = p + '%';
+    document.getElementById(k + 'Detail').textContent = `${cats[k].c}/${cats[k].t} câu đúng`;
+    if (p < 80) weak.push([p, k]);
+  });
+  weak.sort((a, b) => a[0] - b[0]);
+  document.getElementById('adviceBox').innerHTML = weak.length
+    ? '📌 <b>Gợi ý ôn tập:</b><br>' + weak.map(w => '• ' + reviewTips[w[1]]).join('<br>')
+    : '✅ Tất cả các phần đều đạt từ 80% trở lên. Giữ vững phong độ!';
+  const record = {name: playerName, score: pct, time: elapsed, ts: Date.now()};
+  let lb = [];
+  try { lb = JSON.parse(localStorage.getItem('toeic_day6_nhanh_lb') || '[]'); } catch(e) { lb = []; }
+  lb.push(record); lb.sort((a, b) => b.score - a.score || a.time - b.time); lb = lb.slice(0, 20);
+  try { localStorage.setItem('toeic_day6_nhanh_lb', JSON.stringify(lb)); } catch(e) {}
+  const medals = ['🥇','🥈','🥉'];
+  document.getElementById('lbBody').innerHTML = lb.map((r, i) => {
+    const me = r.ts === record.ts; const m = Math.floor(r.time / 60), s = r.time % 60;
+    const safe = String(r.name).replace(/[<>&]/g, '');
+    return `<tr class="${me ? 'me' : ''}"><td class="lb-rank">${i < 3 ? medals[i] : i + 1}</td><td class="lb-name">${safe}</td><td class="lb-score">${r.score}%</td><td class="lb-time">${m}:${String(s).padStart(2,'0')}</td></tr>`;
+  }).join('');
+  showScreen('resultScreen');
+}
+function retryQuiz() { stopAudio(); showScreen('startScreen'); }
+function renderReview(filter, btn) {
+  if (btn) { document.querySelectorAll('#filterRow button').forEach(b => b.classList.remove('on')); btn.classList.add('on'); }
+  const html = questions.map((q, i) => {
+    const ua = answers[i], ok = ua === q.ans;
+    if (filter === 'wrong' && ok) return '';
+    if (['howT','howP','whyT','whyP'].includes(filter) && q.cat !== filter) return '';
+    const icon = ok ? '✅' : ua === -1 ? '⏭️' : '❌';
+    const opts = q.opts.map((o, oi) => {
+      let c = ''; if (oi === q.ans) c = 'correct'; if (oi === ua && ua !== q.ans) c = 'wrong';
+      return `<div class="option ${c}" style="pointer-events:none">${o}</div>`;
+    }).join('');
+    return `<div style="margin-bottom:20px"><span class="category-badge ${catMap[q.cat]}">${labelMap[q.cat]}</span> <span style="font-size:.85em;color:#64748b">${icon} Câu ${i+1}</span>
+      <div class="question-card"><div class="question-text">${i+1}. ${q.q}</div><div class="options">${opts}</div><div class="explanation show">💡 ${q.exp}</div></div></div>`;
+  }).join('');
+  document.getElementById('reviewArea').innerHTML = html || '<p style="color:#94a3b8">Không có câu nào trong mục này 🎉</p>';
+}
+function showAnswers() { renderReview('all', document.querySelector('#filterRow button')); showScreen('reviewScreen'); }
+function backToResult() { showScreen('resultScreen'); }
+document.getElementById('playerName').focus();
+</script>
+</body>
+</html>
